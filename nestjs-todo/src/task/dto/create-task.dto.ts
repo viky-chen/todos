@@ -1,19 +1,24 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Task } from '../entities/task.entity';
 
-export class CreateTaskDto
-  implements Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'userId'>
-{
+export class CreateTaskDto implements Task {
+  @ApiProperty({
+    required: false,
+  })
+  id: number;
+  createdAt: number;
+  updatedAt: number;
   @ApiProperty()
   title: string;
   @ApiProperty({
     required: false,
+    default: '',
   })
-  description: string;
+  description: string = '';
   @ApiProperty({
     required: false,
   })
   completed: boolean;
 
-  userId?: number;
+  userId: number;
 }

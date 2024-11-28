@@ -1,6 +1,62 @@
-import { Button, Input, Row, Space } from "antd";
-
+import { Button, Checkbox, Input, Row, Space, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { todoApi } from "../../services";
+import { CreateTaskDto } from "../../services/TodoApi";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const { Text } = Typography;
+const TaskItem = ({
+  data,
+  onDelete,
+}: {
+  data: CreateTaskDto;
+  onDelete: () => void;
+}) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        border: "1px solid #E5E7EB",
+        padding: "17px 15px",
+        borderRadius: "8px",
+        boxShadow: "0px 1px 2px 0px rgba(0, 0, 0, 0.05)",
+      }}
+    >
+      <Checkbox checked={data.completed} />
+      <div
+        style={{
+          flex: 1,
+          textAlign: "left",
+          margin: "0 12px",
+        }}
+      >
+        <Text delete={data.completed}>{data.title}</Text>
+      </div>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        {/* <div>
+          Due:
+          {data.description}
+        </div> */}
+        <Space>
+          <EditOutlined />
+          <DeleteOutlined onClick={onDelete} />
+        </Space>
+      </div>
+    </div>
+  );
+};
 export const Home = () => {
+  const [tasks, setTasks] = useState<CreateTaskDto[]>([]);
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    todoApi.api.taskControllerFindAll().then((res) => {
+      setTasks(res.data);
+    });
+  }, []);
   return (
     <div
       style={{
@@ -28,6 +84,7 @@ export const Home = () => {
             width: "100%",
           }}
         >
+          {/* 添加任务输入框 */}
           <div>
             <Row
               style={{
@@ -39,7 +96,12 @@ export const Home = () => {
                   flex: 1,
                 }}
               >
-                <Input placeholder="Add a new task..." size="large" />
+                <Input
+                  placeholder="Add a new task..."
+                  size="large"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
               </div>
               <Button
                 style={{
@@ -47,11 +109,22 @@ export const Home = () => {
                 }}
                 type={"primary"}
                 size={"large"}
+                onClick={() => {
+                  todoApi.api
+                    .taskControllerCreate({
+                      title: value,
+                    })
+                    .then((res) => {
+                      setTasks([...tasks, res.data]);
+                      setValue("");
+                    });
+                }}
               >
                 Add
               </Button>
             </Row>
           </div>
+          {/* 筛选过滤搜索 */}
           <div
             style={{
               display: "flex",
@@ -107,6 +180,33 @@ export const Home = () => {
                 </Button>
               </Space> */}
             </div>
+          </div>
+          {/* 任务列表 */}
+          <div>
+            <Space
+              direction={"vertical"}
+              style={{
+                width: "100%",
+              }}
+            >
+              {tasks.map((task) => (
+                <div key={task.id}>
+                  <TaskItem
+                    data={task}
+                    onDelete={() => {
+                      if (task.id) {
+                        todoApi.api
+                          .taskControllerRemove(task.id)
+                          .then((res) => {
+                            console.log("res", res);
+                          });
+                        setTasks(tasks.filter((item) => item.id !== task.id));
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+            </Space>
           </div>
           <div
             style={{

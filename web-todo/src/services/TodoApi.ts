@@ -36,7 +36,9 @@ export interface UpdateUserDto {
 }
 
 export interface CreateTaskDto {
+  id?: number;
   title: string;
+  /** @default "" */
   description?: string;
   completed?: boolean;
 }
@@ -346,12 +348,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     taskControllerCreate: (data: CreateTaskDto, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<CreateTaskDto, any>({
         path: `/api/todos/task`,
         method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -364,10 +367,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     taskControllerFindAll: (params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<CreateTaskDto[], any>({
         path: `/api/todos/task`,
         method: "GET",
         secure: true,
+        format: "json",
         ...params,
       }),
 
@@ -413,7 +417,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/api/todos/task/{id}
      * @secure
      */
-    taskControllerRemove: (id: string, params: RequestParams = {}) =>
+    taskControllerRemove: (id: number, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/todos/task/${id}`,
         method: "DELETE",

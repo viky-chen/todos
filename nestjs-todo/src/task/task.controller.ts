@@ -12,7 +12,7 @@ import {
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 
 @ApiBearerAuth()
@@ -21,10 +21,17 @@ import { AuthGuard } from '../auth/auth.guard';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
+  @ApiOkResponse({
+    type: CreateTaskDto,
+  })
   @Post()
   create(@Req() req, @Body() createTaskDto: CreateTaskDto) {
     const user = req.user;
     createTaskDto.userId = user.id;
+    createTaskDto.description = createTaskDto.description || '';
+    createTaskDto.completed = createTaskDto.completed || false;
+    console.log(createTaskDto);
+
     const task = {
       createdAt: Date.now() / 1000,
       updatedAt: Date.now() / 1000,
@@ -33,6 +40,9 @@ export class TaskController {
     return this.taskService.create(task);
   }
 
+  @ApiOkResponse({
+    type: [CreateTaskDto],
+  })
   @Get()
   findAll() {
     return this.taskService.findAll();
@@ -51,7 +61,7 @@ export class TaskController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.taskService.remove(+id);
   }
 }

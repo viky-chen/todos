@@ -1,5 +1,5 @@
 import { CommonEntity } from 'src/common/common.entity';
-import { Entity, Column, PrimaryGeneratedColumn, EntitySchema } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Task {
@@ -10,7 +10,7 @@ export class Task {
   title: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column()
   completed: boolean;
