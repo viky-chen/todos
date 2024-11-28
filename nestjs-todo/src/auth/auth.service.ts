@@ -16,9 +16,9 @@ export class AuthService {
   ) {}
 
   async signIn(name: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOneByName(name);
+    const user = await this.validateUser(name, pass);
 
-    if (!(await PasswordUtils.comparePasswords(pass, user?.password))) {
+    if (!user) {
       throw new UnauthorizedException({
         code: 401,
         message: '用户名或密码错误',
@@ -33,9 +33,9 @@ export class AuthService {
   async validateUser(
     username: string,
     pass: string,
-  ): Promise<Omit<User, 'password'>> {
+  ): Promise<Omit<User, 'password'> | null> {
     const user = await this.usersService.findOneByName(username);
-    if (!(await PasswordUtils.comparePasswords(pass, user?.password))) {
+    if (!user || pass !== user.password) {
       return null;
     }
     if (user && user.password === pass) {

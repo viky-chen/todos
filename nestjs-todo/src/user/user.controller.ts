@@ -8,12 +8,16 @@ import {
   Delete,
   UseFilters,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -28,10 +32,15 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/profile')
-  getProfile() {
-    return this.userService.findAll();
+  getProfile(@Req() req) {
+    const user = req.user;
+    return this.userService.findOneByName(user.name).then((user) => {
+      return {
+        id: user.id,
+        name: user.name,
+      };
+    });
   }
 
   @Get(':id')

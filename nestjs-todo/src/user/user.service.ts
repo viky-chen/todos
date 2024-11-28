@@ -14,13 +14,7 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const hashedPassword = await PasswordUtils.hashPassword(
-      createUserDto.password,
-    );
-    return await this.usersRepository.save({
-      ...createUserDto,
-      password: hashedPassword,
-    });
+    return await this.usersRepository.save(createUserDto);
   }
 
   findAll() {
@@ -33,7 +27,9 @@ export class UserService {
   }
 
   findOneByName(name: string) {
-    return this.usersRepository.findOne({ where: { name: name } });
+    return this.usersRepository.findOne({
+      where: { name: name },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
