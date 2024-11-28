@@ -3,8 +3,9 @@ import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LocalAuthGuard } from './local-auth.guard';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
 
+@ApiExtraModels(LoginUserDto)
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
