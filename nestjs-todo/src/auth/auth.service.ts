@@ -24,7 +24,7 @@ export class AuthService {
         message: '用户名或密码错误',
       });
     }
-    const payload = { sub: user.id, username: user.name };
+    const payload = { sub: user.id, id: user.id, username: user.name };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };

@@ -5,8 +5,12 @@ export class CreateUserDto implements Omit<User, 'id' | 'isActive'> {
   tasks?: String[];
   @ApiProperty({ required: false, description: '是否激活' })
   isActive?: boolean = true;
-  @ApiProperty()
+  @ApiProperty({
+    default: 'viky',
+  })
   name: string;
-  @ApiProperty()
+  @ApiProperty({
+    default: '123456',
+  })
   password: string;
 }

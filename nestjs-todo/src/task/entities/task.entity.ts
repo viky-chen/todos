@@ -19,10 +19,10 @@ export class Task {
   userId: number;
 
   @Column()
-  createdAt: Date;
+  createdAt: number;
 
   @Column()
-  updatedAt: Date;
+  updatedAt: number;
 }
 
 export const UserSchema = new CommonEntity<Task>({
@@ -45,10 +45,10 @@ export const UserSchema = new CommonEntity<Task>({
       default: true,
     },
     createdAt: {
-      type: Date,
+      type: Number,
     },
     updatedAt: {
-      type: Date,
+      type: Number,
     },
   },
   relations: {
