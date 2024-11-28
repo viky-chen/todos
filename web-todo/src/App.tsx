@@ -1,9 +1,8 @@
 import "./App.css";
 import { Button } from "antd";
 import { Api } from "./services/TodoApi";
-const todoApi = new Api({
-  baseUrl: "http://localhost:3000",
-});
+const todoApi = new Api();
+todoApi.instance.defaults.baseURL = "http://localhost:3000";
 const App = () => {
   const handleClick = () => {
     todoApi.api
@@ -11,8 +10,11 @@ const App = () => {
         name: "viky",
         password: "123456",
       })
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        console.log(res.data.access_token);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (

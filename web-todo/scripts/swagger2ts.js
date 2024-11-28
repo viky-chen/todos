@@ -5,4 +5,5 @@ generateApi({
   name: "TodoApi.ts",
   url: "http://localhost:3000/api-docs.json",
   output: resolve(__dirname, "../src/services"),
+  httpClientType: "axios",
 });
