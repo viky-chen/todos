@@ -1,30 +1,49 @@
 import "./App.css";
-import { Button } from "antd";
-import { Api } from "./services/TodoApi";
-const todoApi = new Api();
-todoApi.instance.defaults.baseURL = "http://localhost:3000";
+import { Layout } from "antd";
+import Cookie from "js-cookie";
+import { Header } from "./components/Header";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { Home } from "./pages/Home";
+import { Auth } from "./pages/Auth";
+
+const loader = async () => {
+  const token = Cookie.get("assess_token");
+  console.log("window.location.pathname", token, window.location.pathname);
+  if (!token && window.location.pathname !== "/auth/login") {
+    return (location.href = "/auth/login");
+  } else if (token && window.location.pathname === "/auth/login") {
+    return (location.href = "/");
+  } else {
+    return null;
+  }
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    loader,
+  },
+  {
+    path: "/auth/login",
+    element: <Auth />,
+    loader,
+  },
+]);
 const App = () => {
-  const handleClick = () => {
-    todoApi.api
-      .authControllerLogin({
-        name: "viky",
-        password: "123456",
-      })
-      .then(async (res) => {
-        console.log(res.data.access_token);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
-    <div className="content">
-      <h1>Rsbuild with React</h1>
-      <p>Start building amazing things with Rsbuild.</p>
-      <Button type="primary" onClick={handleClick}>
-        登录
-      </Button>
-    </div>
+    <Layout className="content">
+      <Layout.Header>
+        <Header />
+      </Layout.Header>
+      <Layout.Content
+        style={{
+          padding: "0 80px",
+        }}
+      >
+        <RouterProvider router={router} />
+      </Layout.Content>
+    </Layout>
   );
 };
 
