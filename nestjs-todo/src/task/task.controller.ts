@@ -44,8 +44,9 @@ export class TaskController {
     type: [CreateTaskDto],
   })
   @Get()
-  findAll() {
-    return this.taskService.findAll();
+  findAll(@Req() req) {
+    const user = req.user;
+    return this.taskService.findAll(user.id);
   }
 
   @Get(':id')
@@ -55,8 +56,6 @@ export class TaskController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    console.log(id, updateTaskDto);
-
     return this.taskService.update(+id, updateTaskDto);
   }
 

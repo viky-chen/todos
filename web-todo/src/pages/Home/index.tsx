@@ -1,8 +1,20 @@
-import { Button, Checkbox, Input, Row, Space, Typography } from "antd";
+import {
+  Button,
+  Checkbox,
+  Input,
+  Progress,
+  Row,
+  Space,
+  Typography,
+} from "antd";
 import { useEffect, useState } from "react";
 import { todoApi } from "../../services";
 import { CreateTaskDto } from "../../services/TodoApi";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 const { Text } = Typography;
 const TaskItem = ({
   data,
@@ -49,6 +61,7 @@ const TaskItem = ({
     </div>
   );
 };
+
 export const Home = () => {
   const [tasks, setTasks] = useState<CreateTaskDto[]>([]);
   const [value, setValue] = useState("");
@@ -124,7 +137,7 @@ export const Home = () => {
               </Button>
             </Row>
           </div>
-          {/* 筛选过滤搜索 */}
+          {/* 筛选过滤 */}
           <div
             style={{
               display: "flex",
@@ -180,6 +193,60 @@ export const Home = () => {
                 </Button>
               </Space> */}
             </div>
+          </div>
+          {/* 任务进度 */}
+          <div>
+            <div
+              style={{
+                marginBottom: "10px",
+                backgroundColor: "#E5E7EB",
+                padding: "5px 10px",
+                borderRadius: "8px",
+                width: "80px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text>Progress</Text>
+            </div>
+            <Progress percent={50} strokeColor="#000" />
+          </div>
+          {/* 搜索 */}
+          <div>
+            <Row
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  flex: 1,
+                }}
+              >
+                <Input
+                  placeholder="Search tasks..."
+                  size="large"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              </div>
+              <Button
+                variant="solid"
+                style={{
+                  backgroundColor: "#E5E7EB",
+                  color: "#374151",
+                  borderColor: "transparent",
+                  marginLeft: "10px",
+                }}
+                size={"large"}
+                onClick={() => {
+                  // TODO 搜索任务
+                }}
+              >
+                <SearchOutlined />
+              </Button>
+            </Row>
           </div>
           {/* 任务列表 */}
           <div>

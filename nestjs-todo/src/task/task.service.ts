@@ -17,8 +17,12 @@ export class TaskService {
     return this.taskRepository.save(createTaskDto);
   }
 
-  findAll() {
-    return this.taskRepository.find();
+  findAll(uid?: number) {
+    return this.taskRepository.find({
+      where: {
+        userId: uid,
+      },
+    });
   }
 
   findOne(id: number) {

@@ -1,6 +1,15 @@
 import { Avatar, Dropdown } from "antd";
 import Cookie from "js-cookie";
+import { useEffect } from "react";
+const token = Cookie.get("assess_token");
+
 export const Header = () => {
+  // const [token,setToken] =
+  // useEffect(() => {
+  //   if (!token) {
+  //     window.location.href = "/auth/login";
+  //   }
+  // }, []);
   return (
     <header
       style={{
@@ -29,25 +38,29 @@ export const Header = () => {
           WebToDo
         </span>
       </div>
-      <div className="right">
-        <Dropdown
-          placement={"bottom"}
-          menu={{
-            items: [
-              {
-                label: "Logout",
-                key: "logout",
-                onClick: () => {
-                  Cookie.remove("assess_token");
-                  window.location.href = "/auth/login";
+      {token ? (
+        <div className="right">
+          <Dropdown
+            placement={"bottom"}
+            menu={{
+              items: [
+                {
+                  label: "Logout",
+                  key: "logout",
+                  onClick: () => {
+                    Cookie.remove("assess_token");
+                    window.location.href = "/auth/login";
+                  },
                 },
-              },
-            ],
-          }}
-        >
-          <Avatar src="/images/avatar.jpeg" />
-        </Dropdown>
-      </div>
+              ],
+            }}
+          >
+            <Avatar src="/images/avatar.jpeg" />
+          </Dropdown>
+        </div>
+      ) : (
+        <></>
+      )}
     </header>
   );
 };

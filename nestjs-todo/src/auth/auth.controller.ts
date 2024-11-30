@@ -7,6 +7,8 @@ class LoginResponse {
   @ApiProperty()
   access_token: string;
 }
+
+class RegisterResponse extends CreateUserDto {}
 @ApiExtraModels(LoginUserDto)
 @Controller('auth')
 export class AuthController {
@@ -18,12 +20,14 @@ export class AuthController {
     return this.authService.signIn(loginUserDto.name, loginUserDto.password);
   }
 
+  @ApiOkResponse({ type: RegisterResponse })
   @Post('logout')
   logout() {
     // return this.authService.signIn(loginUserDto.name, loginUserDto.password);
     return 'logout';
   }
 
+  @ApiOkResponse({ type: RegisterResponse })
   @Post('register')
   register(@Body() createUserDto: CreateUserDto) {
     return this.authService.register(createUserDto);
