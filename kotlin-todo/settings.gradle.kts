@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Kolint Todo"
+rootProject.name = "Kotlin Todo"
 include(":app")

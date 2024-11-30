@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.kolinttodo"
+    namespace = "com.example.kotlintodo"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.kolinttodo"
+        applicationId = "com.example.kotlintodo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

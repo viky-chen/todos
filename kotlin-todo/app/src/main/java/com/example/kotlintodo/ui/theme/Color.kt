@@ -1,4 +1,4 @@
-package com.example.kolinttodo.ui.theme
+package com.example.kotlintodo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

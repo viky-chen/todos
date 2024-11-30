@@ -1,4 +1,4 @@
-package com.example.kolinttodo.ui.theme
+package com.example.kotlintodo.ui.theme
 
 import android.app.Activity
 import android.os.Build

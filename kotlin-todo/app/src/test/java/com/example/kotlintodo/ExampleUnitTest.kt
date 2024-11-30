@@ -1,4 +1,4 @@
-package com.example.kolinttodo
+package com.example.kotlintodo
 
 import org.junit.Test
 
