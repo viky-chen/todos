@@ -38,7 +38,8 @@ export class AuthService {
       return null;
     }
     if (user && user.password === pass) {
-      const { password, ...result } = user;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password: _, ...result } = user;
       return result;
     }
   }

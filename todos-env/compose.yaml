@@ -8,5 +8,14 @@ services:
       MYSQL_DATABASE: todos
     ports:
       - 3306:3306
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    environment:
+      REDIS_PASSWORD: secret
+    volumes:
+      - todos-data:/data
 volumes:
   todos-data:
+  todos-data-redis:
