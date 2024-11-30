@@ -1,4 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
@@ -16,15 +23,24 @@ export class AuthController {
 
   @ApiOkResponse({ type: LoginResponse })
   @Post('login')
-  login(@Body() loginUserDto: LoginUserDto) {
-    return this.authService.signIn(loginUserDto.name, loginUserDto.password);
+  @HttpCode(HttpStatus.OK)
+  async login(@Body() loginUserDto: LoginUserDto) {
+    console.log(loginUserDto);
+    const data = await this.authService.signIn(
+      loginUserDto.name,
+      loginUserDto.password,
+    );
+
+    return data;
   }
 
   @ApiOkResponse({ type: RegisterResponse })
   @Post('logout')
   logout() {
     // return this.authService.signIn(loginUserDto.name, loginUserDto.password);
-    return 'logout';
+    return {
+      message: 'logout',
+    };
   }
 
   @ApiOkResponse({ type: RegisterResponse })
