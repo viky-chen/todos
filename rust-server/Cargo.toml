@@ -1,0 +1,8 @@
+[package]
+name = "rust-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = { version = "4", features = ["openssl"] }
+openssl = { version = "0.10" }
