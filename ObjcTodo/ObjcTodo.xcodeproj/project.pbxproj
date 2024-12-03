@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1F22EA431D4E0A56F75851D9 /* Pods_ObjcTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F6500300DAA162CDF36909A /* Pods_ObjcTodo.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		121FFE0D9319D3A478FBCE4A /* Pods-ObjcTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcTodo.debug.xcconfig"; path = "Target Support Files/Pods-ObjcTodo/Pods-ObjcTodo.debug.xcconfig"; sourceTree = "<group>"; };
 		301C70992CFE12B00041816A /* ObjcTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjcTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F6500300DAA162CDF36909A /* Pods_ObjcTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjcTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F8B22B8BB6D3F04D818CFC8 /* Pods-ObjcTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcTodo.release.xcconfig"; path = "Target Support Files/Pods-ObjcTodo/Pods-ObjcTodo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F22EA431D4E0A56F75851D9 /* Pods_ObjcTodo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +55,8 @@
 			children = (
 				301C709B2CFE12B00041816A /* ObjcTodo */,
 				301C709A2CFE12B00041816A /* Products */,
+				6D514544528AA1697FBE39E5 /* Pods */,
+				A5A83EF8C14AEA337267C88D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +68,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6D514544528AA1697FBE39E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				121FFE0D9319D3A478FBCE4A /* Pods-ObjcTodo.debug.xcconfig */,
+				6F8B22B8BB6D3F04D818CFC8 /* Pods-ObjcTodo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A5A83EF8C14AEA337267C88D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F6500300DAA162CDF36909A /* Pods_ObjcTodo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,6 +92,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 301C70B12CFE12B10041816A /* Build configuration list for PBXNativeTarget "ObjcTodo" */;
 			buildPhases = (
+				F53D8184A2B96B3A73E86627 /* [CP] Check Pods Manifest.lock */,
 				301C70952CFE12B00041816A /* Sources */,
 				301C70962CFE12B00041816A /* Frameworks */,
 				301C70972CFE12B00041816A /* Resources */,
@@ -77,8 +105,6 @@
 				301C709B2CFE12B00041816A /* ObjcTodo */,
 			);
 			name = ObjcTodo;
-			packageProductDependencies = (
-			);
 			productName = ObjcTodo;
 			productReference = 301C70992CFE12B00041816A /* ObjcTodo.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +153,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F53D8184A2B96B3A73E86627 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ObjcTodo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		301C70952CFE12B00041816A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +191,7 @@
 /* Begin XCBuildConfiguration section */
 		301C70B22CFE12B10041816A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 121FFE0D9319D3A478FBCE4A /* Pods-ObjcTodo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -150,10 +202,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ObjcTodo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -171,6 +223,7 @@
 		};
 		301C70B32CFE12B10041816A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8B22B8BB6D3F04D818CFC8 /* Pods-ObjcTodo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -181,10 +234,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ObjcTodo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
