@@ -18,7 +18,7 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() loginUserDto: LoginUserDto) {
-    console.log(loginUserDto);
+    // console.log(loginUserDto);
     const data = await this.authService.signIn(
       loginUserDto.name,
       loginUserDto.password,

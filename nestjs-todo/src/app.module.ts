@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
 import { Task } from './task/entities/task.entity';
 import { AuthModule } from './auth/auth.module';
+import { RedisCacheModule } from './common/redis-cache.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     TaskModule,
     UserModule,
+    RedisCacheModule,
   ],
   controllers: [AppController],
   providers: [AppService],

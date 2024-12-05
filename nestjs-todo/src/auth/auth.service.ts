@@ -6,12 +6,14 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/entities/user.entity';
+import { RedisCacheService } from 'src/common/redis-cache.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UserService,
     private jwtService: JwtService,
+    private readonly redisCacheService: RedisCacheService,
   ) {}
 
   async signIn(name: string, pass: string): Promise<{ access_token: string }> {
@@ -24,8 +26,14 @@ export class AuthService {
       });
     }
     const payload = { sub: user.id, id: user.id, username: user.name };
+    const access_token = await this.jwtService.signAsync(payload);
+    this.redisCacheService.set(
+      `user/access_token/${user.id}`,
+      access_token,
+      60 * 60 * 24,
+    );
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token,
     };
   }
 
